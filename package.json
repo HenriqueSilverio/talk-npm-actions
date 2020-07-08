@@ -7,7 +7,11 @@
   ],
   "main": "src/logger.js",
   "scripts": {
-    "test": "jest"
+    "get-version": "echo $npm_package_version",
+    "cz": "git-cz",
+    "test": "jest",
+    "release": "semantic-release",
+    "start": "node src/index.js"
   },
   "author": "Henrique Silverio",
   "license": "MIT",
@@ -18,13 +22,62 @@
     "type": "git",
     "url": "git://github.com/henriquesilverio/talk-npm-actions.git"
   },
+  "release": {
+    "branches": [
+      "master",
+      "next"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
   "devDependencies": {
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/github": "^7.0.7",
+    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "commitizen": "^4.1.2",
+    "conventional-changelog-conventionalcommits": "^4.3.0",
+    "cz-conventional-changelog": "^3.2.0",
     "eslint": "^7.3.1",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "jest": "^26.1.0"
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "semantic-release": "^17.1.1"
   }
 }
