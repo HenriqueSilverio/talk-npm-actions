@@ -1,0 +1,30 @@
+{
+  "name": "@henriquesilverio/talk-npm-actions",
+  "version": "0.0.1",
+  "description": "Exemplo apresentado na talk \"Automatizando release de pacotes npm com GitHub Actions\"",
+  "files": [
+    "/src"
+  ],
+  "main": "src/logger.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Henrique Silverio",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/henriquesilverio/talk-npm-actions.git"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^26.1.0"
+  }
+}
